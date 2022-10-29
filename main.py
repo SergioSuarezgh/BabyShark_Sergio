@@ -501,6 +501,161 @@ shark[shark['fatal(y/n)']=='2017']='UNKWNOW'
 
 #COLUMNA TIME
 
+#gestionamos los nulos
+
+shark.time.isna().sum()
+
+shark.time.fillna(value='unkwnow', inplace=True)
+
+#limpiamos la columna primero generamos una funcion para quitarlos fallos principales
+
+def time(x):
+    
+    x=str(x.lower())
+    
+    hora=re.findall('\d+[a-z]\d+',x)
+    
+    if x=='unkwnow':
+        return x
+    elif re.findall('\d+[a-z]\d+',x):
+        return "".join(hora[0])
+    elif 'morning' in x:
+        return '10:00'
+    elif 'midday' in x:
+        return '12:00'
+    elif 'midnight' in x:
+        return '24:00'
+    elif 'afternoon' or 'after noon' in x:
+        return '17:00'
+    elif 'evening'  in x:
+        return '19:00'
+    elif 'night' in x:
+        return '21:00'
+    else:
+        return x
+
+shark2=shark.copy()
+    
+shark2.time=shark.time.apply(time)
+
+#Hacemos otra función para igualar los datos con dos puntos y dejamos el resto de datos como 'unkwnow
+
+def dospunto(x):
+    hora=""
+    
+    if x=='unkwnow':
+        return 'unkwnow'
+    
+    elif len(x)<3:
+        return 'unkwnow'
+    
+    elif len(x)>6:
+        if "am" or "a.m." or 'pm' or 'p.m.':
+            x.replace('am','')
+            x.replace('a.m.','')
+            x.replace('pm','')
+            x.replace('p.m.','')
+            
+    elif len(x)>10:
+        return 'unkwnow'
+    
+    elif len(x)==4:
+        for n in range(len(x)):
+            if n==2:
+                hora+=':'+x[n]
+            else:
+                hora+=x[n]
+        return hora
+    
+    elif len(x)==5:
+        
+        for num in x:
+            
+            if num  in '1,2,3,4,5,6,7,8,9,0':
+                hora+=num
+                
+        
+            elif num not in '1,2,3,4,5,6,7,8,9,0':
+                hora+=':'
+                
+        
+    else:
+        return x
+    
+    return hora
+
+shark2.time.apply(dospunto)
+
+##COLUMNA INVESTIGATOR OR SOURCE
+#Simplemente limpiamos duplicados no es una columna que nos interese
+
+shark2.investigatororsource.isna().sum()
+
+shark2.investigatororsource.fillna(value='unkwnow', inplace=True)
+
+##COLUMNA SPECIES
+#Limpiamos los nulos
+
+shark2.species.isna().sum()
+
+shark2.species.fillna(value='unkwnow', inplace=True)
+
+#Pasamos una primera funcion para dejar solo las palabras con shark y la que hay delante
+
+def species(x):
+    
+    x=str(x.lower())
+    keyw='([a-zA-Z]+\sshark)'
+    
+    shark=re.findall(keyw,x)
+    
+    if re.findall(keyw,x):
+        return "".join(shark)
+    else:
+        return 'unkwnow'
+    
+shark3=shark2.copy()
+
+shark3.species=shark2.species.apply(species)
+
+#Pasamos una nueva función que quite los casos con dos letras delante de shark
+
+def species2(x):
+    
+    x=str(x.lower())
+    
+    
+    keyw='([a-zA-Z]{1,2}\sshark)'
+    
+    shark=re.findall(keyw,x)
+    
+    if x in re.findall(keyw,x):
+        return 'unkwnow'
+    else:
+        return x
+    
+shark3.species=shark3.species.apply(species2)
+
+
+##LAS COLUMNAS PDF, HREF,HREF_FORMULA Y ORIGINAL NUMBER 
+#Solo limpiamos los null ya que no las vamos a usar
+shark3.pdf.isna().sum()
+
+shark3.pdf.fillna(value='unkwnow', inplace=True)
+
+shark3.href.isna().sum()
+
+shark3.href.fillna(value='unkwnow', inplace=True)
+
+shark3.hrefformula.isna().sum()
+
+shark3.hrefformula.fillna(value='unkwnow', inplace=True)
+
+shark3.originalorder.isna().sum()
+
+shark3.originalorder.fillna(value='unkwnow', inplace=True)
+    
+
 
 
 
