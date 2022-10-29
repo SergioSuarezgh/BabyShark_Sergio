@@ -130,3 +130,5 @@ dmypy.json
 
 #Archivos Csv
 attacks.csv
+pruebas.py
+leerDataFrame.ipynb

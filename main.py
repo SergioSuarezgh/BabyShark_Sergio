@@ -390,7 +390,120 @@ shark.name.isna().sum()
 
 shark.name.fillna(value='unkwnow', inplace=True)
 
-print(shark.name.value_counts().sort_values())
+#Esta columna no tiene mucha relevancia para los estudios pero intetamos limpiarla de la mejor forma posible
+
+
+def name(x):
+    x=x.lower()
+    
+    if re.findall('male',x):
+        return 'unkonwn'
+    elif x=='':
+        return 'unkonwn'
+    elif x==None:
+        return 'unkonwn'
+    elif 'marine' in x:
+        return 'unkonwn'
+    elif  'girl' in x:
+        return 'unkonwn'
+    elif 'boy' in x:
+        return 'unkonwn'
+    elif '_' in x:
+        return 'unkonwn'
+    elif '..' in x:
+        return 'unkonwn'
+    elif 'people' in x:
+        return 'unkonwn'
+    elif 'teacher' in x:
+        return 'unkonwn'
+    elif x=='':
+        return 'unkonwn'
+    elif 'citizen' in x:
+        return 'unkonwn'
+    elif '*' in x:
+        return 'unkonwn'
+    elif 'anonymus' in x:
+        return 'unkonwn'
+    elif 'japanese' in x:
+        return 'unkonwn'
+    elif re.findall('^\d+', x):
+        return 'unkonwn'
+    else:
+        return x
+    
+name('marine dsddsdsd')
+
+shark.name=shark.name.apply(name)
+
+##COLUMNA SEXO
+
+#limpiamos los nulos
+
+shark.sex.fillna(value='unkwnow', inplace=True)
+
+#Al ser poco los valores erroneos los modificamos directamente
+
+shark[shark.sex=='M ']='M'
+shark[shark.sex=='N']='M'
+shark[shark.sex=='.']='unkwnow'
+shark[shark.sex=='lli']='unkwnow'
+
+##COLUMNA INJURY
+
+#Limpiamos nulos
+shark.injury.unique()
+shark.injury.isna().sum()
+shark.injury.nunique()
+shark.injury.fillna(value='unkwnow', inplace=True)
+
+#Tomo la decisión de si hay un texto escrito y no han puesto fatal lo tomo como no mortal y lo modifico
+
+def injury(x):
+    
+    x=str(x.lower())
+    if "fatal" in x:
+        return 'fatal'
+    elif "No injury" or 'no injury' in x:
+        return 'no injury'
+    elif 'injury' in x:
+        return 'injury'
+    elif 'unkwnow':
+        return 'unkwnow'
+    else:
+        return 'injury'
+    
+shark.injury=shark.injury.apply(injury)
+
+shark.injury.unique()
+
+
+##COLUMNA FATAL
+
+#En este caso primero igualamos donde hay algun dato en injury ponemos N en fatal
+
+shark['fatal(y/n)'][shark.injury=='injury']='N'
+
+#Luego limpiamos los nulos
+
+shark['fatal(y/n)'].isna().sum()
+
+shark['fatal(y/n)'].fillna(value='UNKWNOW', inplace=True)
+
+#Convertimos todo en mayusculas y quitamos los espacios
+
+shark['fatal(y/n)']=shark['fatal(y/n)'].str.strip().str.upper()
+
+#Al tener que modificar en pocos casos los hacemos directamente
+
+shark[shark['fatal(y/n)']=='UNKNOWN']='UNKWNOW'
+shark[shark['fatal(y/n)']=='M']='N'
+shark[shark['fatal(y/n)']=='2017']='UNKWNOW'
+
+#COLUMNA TIME
+
+
+
+
 
 
 
