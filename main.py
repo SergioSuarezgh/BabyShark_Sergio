@@ -289,7 +289,7 @@ def year_comparacion(x):
     key=re.findall('\d+',x)
     return "".join(key[0])
 
-print(year_comparacion('1852.10.23'))
+
 
 shark.year=shark.casenumber.apply(year_comparacion)
 
@@ -318,6 +318,84 @@ shark.area.unique()
 shark.area.isnull().sum()
 
 shark.area.fillna(value='unknwon', inplace=True)
+
+##En este caso vamos a gestionar dos valores que aparecen con caracteres extraños nada más de forma 
+#dirercta ya que es complicado establecer regiones geográficas al haber ataques en alta mar
+#'d\x92Étang-Salé'
+#'Vava\x92u'
+
+keyword='d\x92Étang-Salé'
+select3=shark[shark.area.str.contains(keyword, regex=True)]
+
+shark.iloc[2356]='Vavau'
+shark.iloc[2362]='Vavau'
+shark.iloc[2515]='Vavau'
+
+shark.iloc[447]='dÉtang-Salé'
+shark.iloc[607]='dÉtang-Salé'
+
+##COLUMNA LOCATION
+
+#Comprobamos si la columna tiene nulos y los modificamos por 'unkwnow'
+
+shark.location.isnull().sum()
+
+shark.location.fillna(value='unkwnow', inplace=True)
+
+##En este caso no limpiamos nada más ya que las localizaciones al igual 
+# que las areas son de dificil localizacion
+
+##COLUMNA ACTIVITY
+
+#Comprobamos si la columna tiene nulos y los modificamos por 'unkwnow'
+
+shark.activity.isnull().sum()
+
+shark.activity.fillna(value='unkwnow', inplace=True)
+
+#Cogemos cierto patron de actividades y lo pasamos por una función para que cambie los nombres,
+# el resto los consideramos como otros
+
+def actividad(x):
+    dicc_actividades = {"Fishing":re.search(".*[Ff](ishing|ISHING).*",str(x)),
+                    "Swimming":re.search(".*[Ss](wimming|WIMMing).*",str(x)),
+                    "Kite":re.search(".*[Kk](ite|ITE).*",str(x)),
+                    "Walking":re.search(".*[Ww](alking|ALKING).*",str(x)),
+                    "Boogie Board":re.search(".*[Bb](oogie|OOGIE).*",str(x)),
+                    "Body Boarding":re.search(".*[Bb](ody|ODY).*",str(x)),
+                    "Wind Surfing":re.search(".*[wW](ind|IND).*",str(x)),
+                    "Boat":re.search(".*[Bb](oat|OAT).*",str(x)),
+                    "Interact with sharks":re.search(".*[Ss](hark|HARK).*",str(x)),
+                    "Diving":re.search(".*[Dd](iving|IVING).*",str(x)),
+                    "Standing in water":re.search(".*[Ss](tand|TAND).*",str(x)),
+                    "Paddling":re.search(".*[Pp](addl|ADDL).*",str(x)),
+                    "Bathing":re.search(".*[Bb](athing|ATHING).*",str(x)),
+                    "OverBoard":re.search(".*[Oo](verb|VERB).*",str(x)),
+                    "Bathing":re.search(".*[Bb](athing|ATHING).*",str(x)),
+                    "Floating":re.search(".*[Ff](loat|LOAT).*",str(x)),
+                    "Jumping":re.search(".*[Jj](ump|UMP).*",str(x))}
+    for key,values in dicc_actividades.items():
+        if values:
+            return key
+    return "other"
+
+shark.activity=shark.activity.apply(actividad)
+
+
+##COLUMNA NAME
+
+#Como siempre limpiamos nulos y los dejamos como 'unkwnow'
+
+shark.name.isna().sum()
+
+shark.name.fillna(value='unkwnow', inplace=True)
+
+print(shark.name.value_counts().sort_values())
+
+
+
+
+
 
 
 
