@@ -48,19 +48,21 @@ Conocer las especies que más ataques producen, cuantos son mortales y desglosar
     En la columna SPECIES se ha pasado un función para dejar solo la palabra delante de shark y shark.
 
     Las columnas PDF, HREF,HREF_FORMULA Y ORIGINAL NUMBER no las he tocado ya que no las he considerado lo suficientemente importantes para una limpieza.
-    
+
 
 4) Se ha detectado si había datos constantes o con baja varianza pero no se ha detectado ninguno
 
 5) Se ha trazado los outliers sobre la columna de DATE y gtras aplicar la formula me han salido que los outliers superiores estaban en 2099. Este dato no tenia sentido por lo que se ha establecido el outlier superior en 2022 y el inferior en 1846.
     Hemos pasado de 6312 a 6121 filas
 
+6) Se han optimizado los tipos de datos y se ha guardado el fichero en un csv nuevo
+
 
 ![img](outliers.png)
 
 
 
-## EXPPOSICION DE LOS DATOS
+## EXPOSICION DE LOS DATOS
 
 Para las conclusiones hemos eliminado las columnas donde no había especies de tiburones ya que eso falseaba el estudio y nos hemos quedado con unas 1500 filas. Ya que nuestra principal fuente de información son las especies y las actividades para sacar conclusiones
 
