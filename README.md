@@ -23,19 +23,32 @@ Conocer las especies que más ataques producen, cuantos son mortales y desglosar
     3.2) Criterios utilizados por columnas. En todas se han limpiado nulos y se ha dejado principalmente como alternativa en textos unkwnow
 
     3.3) Vamos a repasar las columnas:
-    En la columna DATE se ha utilizado una función para dejar solo las cifras de 4 digitos y se ha pasado esta columna a enteros
-    En la columna CASENUMBER se ha utilizado una función para igualar las fechas y dejar en los casos donde la fecha no fuera clara el formato 0000.00.00. Postetiormente estas columnas se han copiado en CASENUMBER1 Y CASENUMBER2
-    En la columna AGE se ha usado una función que sacaba la media donde aparecían varios numeros y a los string más habituales se le ha dado un valor como young 18.5. En el caso de lo que no entraba en la búsqueda se le ha puesto el valor de 0
-    En la columna TYPE se ha pasado una función para afinar la string Boat
-    3En la columna YEAR  se le ha dado un tratamiento parecido a AGE pero solo con una busqueda por 4 digitos y lo que se saliera de eso dejarlo como desconocido
-    Las columnas COUNTRY, AREA, LOCATION, INVESTIGATOR OR SOURCE solamente hemos realizado una limpieza superficial quitando algunos caracteres extraños o quitando string que hemos detectado como habitualess
-    En la columna ACTIVITY hemos cogido los valores más habituales y les hemos dado formato, el resto los hemos pasado a "other"
-    La columna NAME se le ha dado un tratamiento también superficial limpiando algunas palabras habituales con significado genérico por "unkwnow"
-    La columna SEX tenía pocos valores por lo que se ha realizado una limpieza más manual cambiando directamente los 4 valores erroneos
-    En la columna INJURTY he decido dejar solo 2 valores ""FATAL" e "INJURY". Lo mismo en la columna FATAL(y/n) con solo "Y" o "N"
-    En la columna TIME se ha dejado el formato 00:00 y se ha modificado por una función los rangos de tiempo más usuales por una hora concreta y las desconocidas por 00:00
-    En la columna SPECIES se ha pasado un función para dejar solo la palabra delante de shark y shark
-    Las columnas PDF, HREF,HREF_FORMULA Y ORIGINAL NUMBER no las he tocado ya que no las he considerado lo suficientemente importantes para una limpieza
+    En la columna DATE se ha utilizado una función para dejar solo las cifras de 4 digitos y se ha pasado esta columna a enteros.
+
+    En la columna CASENUMBER se ha utilizado una función para igualar las fechas y dejar en los casos donde la fecha no fuera clara el formato 0000.00.00. Postetiormente estas columnas se han copiado en CASENUMBER1 Y CASENUMBER2.
+
+    En la columna AGE se ha usado una función que sacaba la media donde aparecían varios numeros y a los string más habituales se le ha dado un valor como young 18.5. En el caso de lo que no entraba en la búsqueda se le ha puesto el valor de 0.
+
+    En la columna TYPE se ha pasado una función para afinar la string Boat.
+
+    3En la columna YEAR  se le ha dado un tratamiento parecido a AGE pero solo con una busqueda por 4 digitos y lo que se saliera de eso dejarlo como desconocido.
+
+    Las columnas COUNTRY, AREA, LOCATION, INVESTIGATOR OR SOURCE solamente hemos realizado una limpieza superficial quitando algunos caracteres extraños o quitando string que hemos detectado como habituales.
+
+    En la columna ACTIVITY hemos cogido los valores más habituales y les hemos dado formato, el resto los hemos pasado a "other".
+
+    La columna NAME se le ha dado un tratamiento también superficial limpiando algunas palabras habituales con significado genérico por "unkwnow".
+
+    La columna SEX tenía pocos valores por lo que se ha realizado una limpieza más manual cambiando directamente los 4 valores erroneos.
+
+    En la columna INJURTY he decido dejar solo 2 valores ""FATAL" e "INJURY". Lo mismo en la columna FATAL(y/n) con solo "Y" o "N".
+
+    En la columna TIME se ha dejado el formato 00:00 y se ha modificado por una función los rangos de tiempo más usuales por una hora concreta y las desconocidas por 00:00.
+
+    En la columna SPECIES se ha pasado un función para dejar solo la palabra delante de shark y shark.
+
+    Las columnas PDF, HREF,HREF_FORMULA Y ORIGINAL NUMBER no las he tocado ya que no las he considerado lo suficientemente importantes para una limpieza.
+    
 
 4) Se ha detectado si había datos constantes o con baja varianza pero no se ha detectado ninguno
 
