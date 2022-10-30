@@ -119,7 +119,7 @@ class DataCleaning():
         return low_var
     
         
-    def get_outliers(stats: pd.DataFrame, threshold: float = 1.5) -> pd.DataFrame:
+    def get_outliers(stats: pd.DataFrame, origen,threshold: float = 1.5, ) -> pd.DataFrame:
     
         """
         Esta funcion recibe un dataframe df.describe().T.
@@ -143,7 +143,7 @@ class DataCleaning():
             lower=stats.at[c, '25%'] - cutoff
             upper=stats.at[c, '75%'] + cutoff
 
-            res=df[(df[c] < lower) | (df[c] > upper)].copy()
+            res=origen[(origen[c] < lower) | (origen[c] > upper)].copy()
 
             res['outliers']=c
 
