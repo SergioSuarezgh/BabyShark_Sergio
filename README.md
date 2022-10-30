@@ -23,7 +23,7 @@ Conocer las especies que más ataques producen, cuantos son mortales y desglosar
     3.2) Criterios utilizados por columnas. En todas se han limpiado nulos y se ha dejado principalmente como alternativa en textos unkwnow
 
     3.3) Vamos a repasar las columnas:
-    3.3.1) En la columna DATE se ha utilizado una función para dejar solo las cifras de 4 digitos y se ha pasado esta columna a enteros
+    <b>3.3.1)<b> En la columna DATE se ha utilizado una función para dejar solo las cifras de 4 digitos y se ha pasado esta columna a enteros
     3.3.2) En la columna CASENUMBER se ha utilizado una función para igualar las fechas y dejar en los casos donde la fecha no fuera clara el formato 0000.00.00. Postetiormente estas columnas se han copiado en CASENUMBER1 Y CASENUMBER2
     3.3.3) En la columna AGE se ha usado una función que sacaba la media donde aparecían varios numeros y a los string más habituales se le ha dado un valor como young 18.5. En el caso de lo que no entraba en la búsqueda se le ha puesto el valor de 0
     3.3.4) En la columna TYPE se ha pasado una función para afinar la string Boat
